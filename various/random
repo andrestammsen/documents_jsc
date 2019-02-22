@@ -1,0 +1,20 @@
+
+TODO			CHECK WHAT IS STILL NEEDED OR COULD BE MOVED TO A BETTER PLACE THAT SUITS THE TOPIC
+			random; stammsie's list of temporary random stuff
+
+terminal commands	- vglrun glxinfo
+on jureca		- vim instead of vi
+			- cat /usr/local/jsc/etc/xdg/scripts/launch_pvservers.sh
+			- module --force purge
+			  - module use /usr/local/software/jureca/OtherStages
+			  - module load Stages/Devel-2017b
+			  - module load GCC
+			  - module load ParaStationMPI
+			  - export PSP_SCHED_YIELD=1
+			  - module load ParaView/5.4.1
+			- ml
+			- ml GCC, ml ParaStationMPI, ml ParaView, ...
+			- module spider ParaView
+			- 
+			
+

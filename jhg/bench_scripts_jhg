@@ -1,0 +1,57 @@
+
+BENCH_SCRIPTS_JHG	SUMMARY OF THE GitLab REPOSITORY TO PRODIVE AN EXAMPLE OF A BENCHMARKING PROCEDURE
+
+1) create new template	general copy for completely new entire benchmark run
+				a) copy example directory template.lsf
+				b) change MPI parameters
+				c) change grep_timings
+				d) change plot_bench
+
+2) modify/run		modify basic script and create all necessary job scripts
+				a) adjust runtine, memory... in create_bench
+create bench			b) run create_bench
+
+3) run benchmarks	run tests
+				a) run_bench
+
+4) plot results		plot tests
+				a) run plot_bench
+				b) dump as text file and image file
+
+
+
+create bench		general directory
+				manual settings for mpi
+				automatic settings based on the manual ones by calculation
+				grab bench directory
+				create benchmark-subdirectory
+				dump mpi settings in bench_settings file
+
+				create subdirectories for each test
+				replace mpi task number
+				replace number of nodes
+				replace mpi memory
+				replace parallel env
+				replace testtime
+				replace mpi per node
+
+run bench		check directory
+			go to directory
+			execute all tests
+
+plot bench		grab directory
+			go to directory
+			read bench settings
+			check amount of timing parameters
+			count number of tests
+			get timings and evaluate per test
+			plot timings
+
+bench example		contains result of one benchmark run
+				test file for each scenario (number of nodes etc)
+					job script for the cluster (or several ones)
+					settings file specific for scenario (replaces entries in job script)
+				settings file general (mpi per node, min/max mpi tasks ...)
+				timing file to extract timing data (comm-time, x, y, z)
+				plot file, concrete version for plotting
+

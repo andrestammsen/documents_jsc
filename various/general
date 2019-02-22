@@ -1,0 +1,79 @@
+
+TODO:		TRY THE STUFF AGAIN AND PUT IT IN FILES WHERE IT BELONGS BETTER TO THE TOPIC
+		general; stammsie's lsit of instructions and tips
+
+main issues	1) job script runs with pvserver serial and parallel on jureca
+		2) JUPE to automate operations on the supercomputer
+		3) what do I want to test with my scripts
+
+vncserver	- server side rendering
+		- vgl run: imitates OpenGL-library ?????????
+		  sends to graphics card and receives the pixels back
+		  than vnc embeds the image and sends it to the workstation
+		  ???  "ist" sends commands to graphics card ???
+		  Xserver does not know about htis traffic
+		- start vncserver with options on jureca => e.g. display 8 is started (check message)
+		- TurboVNC can handle extra methods and all protocols (e.g. for loading image data files)
+		  in comparison to the standard vnc
+		- path: /opt/TurboVNC
+		- password only to keep other JSC-users out, not very important
+
+tunnel		- open tunnel to local workstation
+		- tunnel is build from the login-node, e.g. jrc1384
+
+command		- ssh -N -4 -L 5908:jrc1384:5908
+			-N: detached
+			-L: indicate local port and login node / port of jureca server
+
+vnc window	- on local machine
+		- performance and processes are shown
+		- start paraview by clicking the widget => skript pw.sh is executed
+		- F8 to adjust stuff, e.g. the clipboard
+		- choose a stage ????
+		- 12 GB per graphics card
+		  500 GB main storage
+
+pvserver	- alternative script - srun !!! => spawns mpi-commands
+		- hostfile to find out mpi-environment => slurm_hostfile ??? on different cards ???
+		- ??? where do I want to go? machine with VNCserver => only half as many pvserver with switches ???
+		- login-node is not supposed to allow mpi to not fill it up too much?!
+		  => if srun does not work => write job to test the server ??? => icon should work ???
+		- example: vnc server for one hour is a job
+		- pvserver wait for script after start like on local workstation in the tutorial
+		- several servers must be started for parallel processing
+		- reading the data has to be coordinated and distributed so that all data is not read on ony node
+		- each server should process a part of the grid
+		- 3D filter can be applied for that
+		- ??? several tasks with pipe behind output ???
+		- ??? environment variable slurm_ ??? for unique file names ???
+
+
+xserver		- ssh -x bad for visualization !!!
+
+JUPE		- automates the operation of the supercomputer
+
+parallel stuff	- bottleneck: RAM access => CPU ~ 24x faster than RAM can deliver
+		- always reduce the data first
+		- QT for GUI
+		- rendering: ray-trace VS grid => ray-trace scales with HP and is faster in the end
+		- final goal: benchmarking suite
+		- faster code => scales with the bandwidth to the RAM
+		- pages are always loaded as a whole => if possible, put neihgbouring data in the same storage location
+		- data pose a larger problem than computing power
+		- structured VS unstructured => every unst. point: 3 coordinates, those of the neighbours, ID, ...
+
+paraview	- tutorial for basic overview
+		- guide for deeper knowledge than the tutorial
+		- chapter 3 important to understand the data structures
+		- paraview.simple connects paraview to Python
+
+VTK		- largest library for visualization: filter, functions, passing data, ...
+		- everything we do here is based on VTK !!
+		- works with a data- and pipeline- model
+		- vtk is also behind ParaView
+		- written in C++
+		- wrapper-generator => C++ to Python
+		- acces to vtk easier with Python wrapper and ParaView GUI
+
+
+		

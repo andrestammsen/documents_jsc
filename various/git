@@ -1,0 +1,67 @@
+GIT TUTORIAL		summary of commands I used while working on projects with GitLab
+
+------------------------------------------------------------------------------------------------------------------------
+
+COMMANDS		all kinds of terminal commands
+
+			easy initialization starts at the repo!!; that will avoid problems
+git init		initialize empty repository (add all files, mmaybe write some files names to a .gitignore)
+git clone <repo_path>	ssh://git@gitlab.version.fz-juelich.de:10022/stammsen2/<project_name>.git (gitlab)
+git clone <repo_path>	git@github.com:andrestammsen/<project_name> (github)
+git remote add origin	<remote origin repository URL) to add a repo from the command line
+git remote show origin	display the remote URL
+git push -u origin	master (together): only first time to initialize connection to remote rep (that already exists!)
+git status		shows the status of the files in the repository
+git diff		shows all kinds of differences between files rom the repository and the local versions
+git add (.)		adds/stages (all) files to the commit; point for all files, otherwise specify files
+git commit (-m)		commit the changes of the files to the repository ("-m": write a message in the same terminal)
+git push origin master	pushes the changes to the remote repository ("origin" indicates the repo's URL (SSH or HTTPS))
+git log			show a history of the repository
+git checkout master	go to master branch
+git pull origin master	pull the latest changes
+git remote -v		show the remote repositories
+git checkout <name>	switch to the specified branch
+git checkout -b <name>	create a new branch and switch to it immediately
+git rm <name>		delete the file from the local file system and stages the file for deletion
+git branch		show the current branch
+git checkout .		delete all changes in files that have not been added to the staging area, leave unstaged files
+git clean -f		delete all untracked changes, thus only files that have never been added
+git reset .		undo the most recent add, but not committed, files
+git merge master	merge created branch with master (checkout to branch before!); or do it the other way around
+git reset HEAD~1	undo the most recent commit
+    .gitignore		write file names into this file that should be excluded structurally from all git actions
+git push --set-upstream ssh://git@gitlab.version.fz-juelich.de:10022/stammsen2/<project_name>.git master (macro:) )
+
+------------------------------------------------------------------------------------------------------------------------
+
+BASIC SETUP		only once !!! local initialization of git	after that, it can be changed if necessary
+
+user name definition	git config --global user.name "stammsen2"	identification as the author of the repository
+verify user name	git config --global user.name			verifies that the correct username was entered
+user email definition	git config --global user.email "a.stammsen@..."	identification as the author of the repository
+verify user email	git config --global user.email			verifies that the correct username was entered
+core editor definition	git config --global core.editor "vim"		sets vim as the default editor for the commits
+verify core editor	git config --global core.editor			verifies that the correct core editor was chosen
+view global information	git config --global --list			username, email, core editor ...
+version check           git --version                                   shows the version (pre-)installed on the system
+
+------------------------------------------------------------------------------------------------------------------------
+
+SSH SETUP		generate and place public and private key for easy communication
+
+generate keypair	ssh-keygen -o -t rsa -b 4096 -C "a.stammsen@fz-juelich.de"
+save keyfile		"id_rsa_gitlab"
+public key to clipboard	xclip -sel clip < ~/.ssh/id_rsa_gitlab.pub
+paste key to GitLab	avatar in GitLab -> settings -> SSH Keys -> paste key -> name it
+add key to SSH-client	eval $(ssh-agent -s)
+			ssh-add ~/.ssh/id_rsa_gitlab
+			-> IMPORTANT! OTHERWISE KEY NOT FOUND
+			-> add all keys at the same time so they are always present !!!
+			-> execute the command as often as necessary in a row
+save settings to file	if not already present, create a file named "config"
+			# GitLab.com
+			  Host gitlab.com
+			  Preferredauthentications publickey
+			  IdentityFile ~/.ssh/id_rsa_gitlab
+test correct setup	ssh -T git@gitlab.com (DOES NOT WORK ???!!! BUT EVERYTHING ELSE DOES :):):):) )
+

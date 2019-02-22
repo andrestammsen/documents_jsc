@@ -1,0 +1,147 @@
+
+JRC	stammsie's introduction to the use of JURECA
+	summary of the jsc-sites on the internet
+
+=========================================================================================================================
+
+quick overview
+
+enter			ssh stammsen@jureca
+exit/logout		exit
+$HOME			normal home directory
+$WORK			will be erased after three month
+$DATA			bigger and faster
+$ARCH			magnetic tapes; huge and very slow
+			use tar before transferring files to circumvent random data distribution
+q_dataquota		shows my data quota
+account			stammsen@jrc1384 e.g.
+
+=========================================================================================================================
+
+quick introduction
+
+http://www.fz-juelich.de/ias/jsc/EN/Expertise/Supercomputers/JURECA
+/UserInfo/QuickIntroduction.html?nn=1803700#doc1803722bodyText15
+(one line, but separated for overview)
+
+-------------------------------------------------------------------------------------------------------------------------
+
+JURECA usage model
+
+  - accessed through a set of login nodes (port 22 for ssh tunnel)
+  - write/compile applications
+  - pre/-post processing of simulation data
+  - workload manager: access control to compute and virtualization nodes
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Data Management
+
+  - JUST, JUDAC and JUWELS; check details later
+
+-------------------------------------------------------------------------------------------------------------------------
+
+JURECA Hardware Overview
+
+  - list of different types; check details later
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Access to JURECA
+
+
+  - login nodes
+
+    - generic name: jureca
+    - specific names: jureca01, jureca02...
+    - domain: fz-juelich.de (fully qualified name only necessary from outside the fz campus)
+    - full example command: ssh stammsen@jureca01.fz-juelich.de
+    - enough in my case: ssh stammsen@jureca
+    - visualization department: ssh stammsen@jurecavis
+
+
+  - login environment
+
+    - Shell: /bin/bash; only bash is fully supported as a shell without degeneration of the system's user experience
+
+    - filesystems: 
+
+      - &HOME: the full path to the home directory of each user is stored in the shell environment variable &HOME
+               to hide the details of the home filesystem layout
+               filesystem for storage of source code, binaries etc.
+               login & compute
+      - $WORK: scratch filesystem for temporary data
+               login & compute
+      - $ARCH: user's storage location for archiving on tape
+               login
+               (the values of those three variables are set during the login process)
+
+    - programming environment, modules, libraries
+
+      - .bashrc and .profile govern the persistent settings of the shell environment
+      - "/usr/local/software" contains the software modules
+      - libraries and applications are installed in the environment and can be interfaced with the command "module ..."
+
+    - machine identification file
+
+      - easier handling of the &HOME filesystem on differen supercomputers
+      - "/etc/FZJ/systemname"
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Software on JURECA
+
+  - Basic modules usage
+
+    - show available modules		module avail
+    - show hidden modules			module --show-hidden avail
+    - show bundled packages		module key numpy
+    - show activated modules		module list
+    - learn about module			module spider gromacs (e.g.)
+
+  - Available compilers, MPI runtimes and basic math libraries
+
+    - GCC, Intel, PGI
+    - ParaStationMPI, IntelMPI, MVAPICH
+    - more info available; check if necessary
+
+  - GPUs and modules
+
+    - specific compiler versions are needed to enable GPU usage
+    - a GPU-aware toolchain needs to be used
+    -  more information available; check if necessary
+
+  - KNL booster module
+
+    - can be loaded; check if necessary
+
+  - Finding software packages
+
+    - the same commands as in Basic modules usage apply
+
+  - Stages
+
+    - software updates, normally every six month, parallel to allocation time for new projects
+      to load old stages of software:
+    - "module use /usr/local/software/jureca/OtherStages"
+      "module use/usr/software/jurecabooster/OtherStages"
+
+  - Scientific software at JSC
+
+    - gives an overview of what is supported and how to use it; check if necessary
+
+  - Requesting new software
+
+    - possible; check if necessary
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Compile with the Intel Compilers
+
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,54 @@
+
+TODO: TRY ALL OF THEM AGAIN AND PUT THEM IN A FILE THAT BELONGS TO THE TOPIC
+
+loose collection of commands that were successfully used
+
+sbatch --start-xserver vncviewer_two_hours.job
+
+mark text => middle click on mouse
+
+cp authorized_keys known_hosts ~/.ssh
+
+sacct
+
+sbatch parallel_wavelet.job
+
+ssh -N -4 -L 5902:jurecavis02:5902 stammsen2@jurecavis02.fz-juelich.de
+
+ssh -N -4 -L 5902:jrc1386:5902 stammsen2@jureca.fz-juelich.de
+
+sbatch --start-xserver vncviewer_two_hours.job
+
+rm authorized_keys known_hosts
+
+display wavelet_contour_100.png
+
+vncpasswd
+
+cd jusers
+
+scp stammsen2@jureca.fz-juelich.de:~/../../../../project/cjsc/stammsen/simple_jobs/wavelet_contour.png  ~/wavelet_contour.png
+
+ssh stammsen2@jureca.fz-juelich.de
+
+ssh stammsen2@jurecavis.fz-juelich.de
+
+jutil user projects -o columns
+
+jutil stammsen projects -o column
+
+srun ./parallel_wavelet.job
+sbatch parallel_wavelet.job
+
+tail -f stammsen_parallel_wavelet-6625834.err
+
+srun --help | grep "x"
+srun --help | grep "-x"
+srun --help | grep variable
+srun --help | grep mpi
+
+cat /var/spool/parastation/jobs/6625709
+
+pvpython --help
+
+

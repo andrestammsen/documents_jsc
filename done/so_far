@@ -1,0 +1,318 @@
+
+TODO:		MERGE THIS FILE IN PART WITH OTHERS WHERE THE INFO FITS BETTER AND MAYBE MAKE A SUMMARY AND BACKUP
+
+so_far ------------------- steps that have or have not worked but are more or less checked out -------------------------
+------------------------------------------------------------------------------------------------------------------------
+use vncviewer	--------------------------------------------------------------------------------------------------------
+
+
+			execute all programs on the remote machine and just view the tranfserred pixels locally
+				=> WORKS !!!!!
+				=> login to ssh
+				=> start xserver for vncserver as batch job (sbatch) with script on the remote machine
+				=> open tunnel (with IPv4) to send the data from the remote process to the local machine
+				=> start TurboVNC as viewer on the local machine
+				=> use remote account and execute all programs there, only pixels are sent to me
+
+end use vncviewer ------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+local execution --------------------------------------------------------------------------------------------------------
+
+
+mpi and batch		./mpiexec -np 24 ./pvbatch parasphere.py
+				=> WORKS !!!!!
+				=> local execution
+				=> executes script as batch job
+				=> nothing is displayed, but the file "parasphere.png" is created
+				=> four processes are used (according to the vtkProcessID coloring)
+				=> parallelization is done automatically at the start of the pipeline by pvbatch
+					=> less work since the distribution of the processes requires
+					   no manual actio at the start of the pipeline
+					=> less work since the distribution of the processes requires no manual action
+					=> pvbatch without mpi is the same as pvpython :):)
+					=> pvbatch can only be compiled with MPI, but can be executed without
+					=> dynamic linker will search for libraries to resolve the functions for mpi,
+					   that means that the environment is required
+			
+
+pvserver with mpi	./mpiexec -np 24 ./pvserver --server-port="11112" (--hostname="localhost" not necessary!!!)
+				=> WORKS !!!!! 
+
+				a) connecting to the server with the GUI
+					=> WORKS !!!!!
+					=> local execution
+					=> according to the vtkProcessID coloring in parallel
+					=> open GUI, choose server, execute script
+				
+				b) file as argument to pvpython and pvserver
+					=> WORKS !!!!! (basically, but segmentation fault :( )
+					=> ./pvpython --server-url="cs://localhost:11112" test_server.py
+					=> pass server-url as String to pvpython and pass file as argument
+					=> local execution
+					=> pvpython starts a server, connects to it and executes the script
+					=> TODO: try the same with the sphere to check the parallelism
+
+conn pv GUI to server	./paraview --server-url="localhost"
+at startup			=> DOES NOT WORK !!!!!
+				=> local execution
+				=> only one vktProcessId is shown as color
+
+
+end local execution ----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+remote execution -------------------------------------------------------------------------------------------------------
+
+paraview and servers	use a script to start paraview (load modules ...) and a script that start 12 servers (JHG)
+				=> WORKS !!!!!
+				=> the server script was taken from JHG and starts 12 servers
+				=> the communication takes place only between the GUI and the "leading" server
+
+execute python file	....
+as batch job		
+
+
+
+BRAINSTORM WITH JHG - 181128 -------------------------------------------------------------------------------------------
+
+
+tips:			use wavelets for all tests
+				data is already mapped
+				data is structured
+			CHECK mpi_init procedure to understand better the pvbatch process
+				=> pvserver is started on each process
+				=> master of the servers is used for communication with the job (servermanager)
+			CHECK always the function arguments
+
+tasks:			benchmarking:	- use pvbatch on jureca for wavelet script 1000 x 1000 x 1000 
+					- calculate the time
+					- check the size of the data: amount of variables times data size (float?!)
+					- long pipelines will cause quick growth of the data size
+					- most basic principle of weak or strong scaling
+					- problem should be big enough to have a good workload for many cores but also
+					  but small enough to be executed on one node
+					- speedup and efficiency
+					- scaling: how does the solution time vary with the number of processors
+						a) weak scaling		fixed problem size per processor
+						b) strong scaling	fixed total problem size
+					- double data/double nodes => communication overhead grows > how does it scale?
+					- main idea: test big wavelet
+						=> between one and five nodes
+						=> between one and 120 processors
+						=> distribution of work is not my problem
+					=> try to use all processors => maybe cut, angle, camera position, filter ...
+
+			approach:	build script that build folders with scripts for all scenarios, executes all
+					the scripts and collects all the timing data; the main script loops 120
+					times to produce the subsripts; use "sed"-command to only change the amount
+					of processes and nodes on one spot
+			
+			future task:	check whether or not the image is correct
+					a reference image will be compared to the result
+					=> the image won't be aexactly the same anyway
+					   => how do you automatically decide whether it is the same or not?
+					      when is almost the same the same?
+					=> I should start with only checking whether the file actually exists
+					    any plot-program will do from that point
+
+			a) execution script
+			b) create script
+			c) created scripts
+			d) collect script
+			e) submit script
+			f) archive/delete script
+			
+			send output to file
+			jsut bash scripts
+			psbl gnu plot
+
+			result:	maybe edge at node limit
+				cashing effects?!
+				infiniband
+
+			specify the amount of nodes and the amount of processes
+			=> the exact distribution over the nodes and CPUs is done automatically
+			   => e.g. points in a graph that are close are sent to close CPUs as well
+
+			check:	mapping files for MPI => control over the IP-addresses of the processes 
+				=> forces MPI to use specific certain nodes
+				   => maybe for the future
+
+			==>> all bash scripts are only used for validation purposes and to get to know the workflow
+				=> not too nice, it is not necessary
+				=> when using JUPE, this can be used as a reference point => should be exactly the same
+
+			JUPE is just an organization toll to keep the overview over all the data
+
+final goal:		vast results over the cluster by means of very large datasets of benchmark results
+			which can be the reference for discussion over hardware etc
+
+
+general:		never open any x-windows / never display any graphics in batch-mode
+			results must be reliable !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+job reporting:		CHECK !!!
+			jsc job reporting
+			look on website => check pdf for storage usage, CPUs usage ...
+			=> e.g. compare calculated storage use for a problem with the job report results
+			   => check e.g. 1 GB, 2GB, ... to check how big a part the OS plays and to get a feeling
+			      for the right expectations
+
+
+END OF BRAINSTORM WITH JHG - 181128 ------------------------------------------------------------------------------------
+
+BRAINSTORM WITH JHG - 181214 -------------------------------------------------------------------------------------------
+
+overall lesson		no-mpi => pvpython will work after importing paraview => mpi-problem solved ?!
+
+off-screen-rendering	necessary because there is no screen; "force read" in bash; force off-..., not --use off...
+
+mpi initialization	srun and pvpython/pvbatch both want to initialize mpi
+			=> stop srun from initializing mpi => works !!!!!
+			=> skript can not be attached
+
+DISPLAY=:0.0		not both graphics cards, only the first one (as specified)
+
+ntasks			specify ntasks, even if it is counterintuitive since the number of nodes and tasks seems enough
+
+-c			for skripting; ' ...... ' : whole String will be interpreted as one command
+
+visible != show		in my skript, the show should be replaced by a function that just makes the data visible
+			=> in the pv GUI, it makes sense to make something visible by showing it to make it easy for the
+			   user to see, but without a GUI it is not necessary and will only use CPU time
+
+tail -f			shows the last 10 lines of a file, even when it grows during the command
+
+sftp://stammsen2 ...	file-browser on jureca
+
+hyperthreading		2 sockets, 12 kernels per socket, 2 threads per kernel => 48 parallel calculations
+
+dd			delete whole row in bash
+
+bandwidth		causes more problems than calculation speed on jureca
+
+pvserver / paraview	when several pvservers are started, paraview will try do distribute the work if possible
+
+high resolution timer	time measurements
+
+middle mouse button	paste marked text to cursor position
+
+wait			in skript
+
+sinfo			shows running jobs on the system ?!
+
+sacct			shows running jobs on my account ?!
+
+-x			setting
+
+-xserver		on Jureca GPU => vglrun fetches result from node
+
+display 0 & 2		two displays respectively rendering on two GPUs
+
+--offscreen-rendering	rendering even when there is no monitor => for bash processing
+
+double mouse click	marks text between blanks
+
+srun & mpi		srun normally takes care of all mpi stuff
+
+schedule jureca		will wait something like 10s or so to execute the submitted job script
+
+pvpython		~ python + pv
+
+path variable		pvpython export path variable
+
+git jureca		possible, check passphrase for the account
+
+key agent		maybe for the future to manage passphrases
+			CHECK !!!
+
+.profile		instead of .bashrc maybe better ?! to solve problem with necessary extra bash command on jureca
+			CHECK !!!
+
+config file login	state name of the key etc. to do automatic login
+			CHECK !!!
+
+Strg + r		reverse command search
+
+
+END OF BRAINSTORM WITH JHG - 181214 ------------------------------------------------------------------------------------
+
+
+submit simple job	=> complete cycle including loading modules etc ?
+			=> indicate desired node ?
+			( => on local machine, pvbatch does the job of distributing the tasks itself! )
+
+
+BRAINSTORM WITH JHG - 181220 -------------------------------------------------------------------------------------------
+
+
+--force purge		less output in *.err-file, but should not be used because auxiliary programs are purged as well
+
+srun			kind of like mpiexec + all kinds of service
+
+plot			use matplotlib
+
+Jupyter			check again :):):)
+
+-X			when graphics should be displayed on Jureca
+			=> display <graphics file>.<ext>
+			=> is a vis node necessary????
+
+OpenGL			only when no OpenGL is used => rendering is done on the local machine
+			=> otherwise use the vncviewer to render everything on the remote machine
+
+strong/weak scaling	CHECK !!!!! and use it in your benchmark
+
+			a) same problem, more cores
+			b) greater problem, more cores
+			c) go in depth with the time calculation
+
+.vnc			per machine one extra .vnc
+			=> vncpasswd to create password for the vnc
+
+$HOME			one $HOME per machine (jureca, jewels...)
+			=> machine specific settings necessary
+
+wallclock VS CPU time	wallclock time	how long did the job take from submission till completion
+			CPU time	how long did the CPU actually work on the job
+
+srun & pvbatch		collect times at those two spots, later maybe more
+			=> srun		start of the whole process
+			=> pvbatch	each process for itself
+			=> script	later you could try timing in different parts of the actual python script
+
+OpenGL			for vncviewer to render e.g. 3D images on the remote machine
+
+remote explorer		CHECK !!!!!
+
+node exclusiveness	as soon as I use one kernel on a node, the whole node is reserved for my job exclusively
+
+JUPE			GNU plots
+
+TODO			=> minimalize Python script: no superfluous "show" command e.g.
+				=> check the pv functions and the standard settings, maybe more stuff ?!
+				=> timing: how long does every step take (initialization srun, pvbatch, sole process...)
+			=> regex & bash & linux
+			=> update automatic script suite for the wavelet_contour script
+			=> MPI
+
+MPI-finalize		barrier till the last process has finished
+
+data generation		where exactly? on rank 0 (and then distributed to the other ranks) or on all ranks ?
+
+renderer		which renderer is used exactly? if not indicated in the Python script (as it is the case now),
+			the standard renderer is chosen => CHECK !!!!
+
+srun calls MPI		on local workstation: ./mpiexec -np 4 ./pvbatch <progname> => mpi is called, than pvbatch
+			the same is done for pvserver, so both do not call it automatically, thus it needs to be done by
+			srun, and then the bash script can be executed
+			=> in the parallel_wavelet.job-script, the bash script is called with all the specifications
+
+time command		CHECK !!!!! how it is done on Jureca
+			=> keep in mind that it also takes some time to execute
+
+time per kernel		the time that the kernel spent on the process can include idle time
+			=> maybe calculate the amount of operations
+
+
+
+

@@ -1,0 +1,23 @@
+
+TODO	TRY TO FIGURE OUT WHAT CAN GO AND WHAT COULD BE MOVED TO A PLACE WHERE IT FITS BETTER TO THE TOPIC
+ASK questions
+
+181031	- the file system for a user account on jureca works like ???
+	- view-only password?? (vncpasswd)
+	- logout vnc session how?
+	- what does the number jrc1384 e.g. mean?
+	- why can't I see the process number which is indicated in the corresponding .pid-file of the vnc-server?
+
+181107	- difference batch job and pvpython job => no display of image ?!
+	- why does the manyspheres.py-script not execute in paraview, but only from inside the terminal?
+ 
+181108	- Error pops up when starting the vncviewer locally: XFCE PolicyKit Agent
+	- why does pw5.. not run with vnc?
+
+181219	- vncviewer can't be started; password too short ?!
+	- parallel_wavelet-job needs always the same time no matter how large the wavelet should be
+
+
+
+ 
+

@@ -1,0 +1,17 @@
+
+TODO:			MERGE IT WITH THE OTHER FILES OF THE SAME KIND AND MAYBE DRAW MINDMAPS INSTEAD OF PLAIN TEX
+
+JHG			tips / advice / meetings with Jens Henrik Goebbert
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+
+181214
+
+access vncviewer	=> account?
+
+submit simple job	=> complete cycle including loading modules etc ?
+				=> indicate desired node ?
+			( => on local machine, pvbatch does the job of distributing the tasks itself! )
+	
+------------------------------------------------------------------------------------------------------------------------

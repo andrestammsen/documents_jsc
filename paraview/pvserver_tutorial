@@ -1,0 +1,10 @@
+
+PVS		pvserver; stammsie's little list of tips for the use of pvserver
+
+parallel y/n	when starting several pvservers on a node, probably only one server will read the data
+		to check whether or not the input is organized in a parallel way, check the window for the workload
+
+start on jureca	srun --cpu_bind=none --ntasks=24 --gres=gpu:0 vglrun pvserver --use-offscreen-rendering
+		( only because of environment variable problem:			)
+		( unset SLURM_SPANK__SLURM_SPANK_OPTION_visspank_start_xserver	)
+

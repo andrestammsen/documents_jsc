@@ -1,0 +1,18 @@
+
+TDO			stammsie's workload list
+
+slurm			DONE: continue to summarize the Introduction to Slurm slides at slide slide 10
+
+pv.sh			CHECK: pv.sh script is executed on jureca ??!!
+
+stage			CHECK: what is it and how is it chosen (jureca)
+
+vgl			CHECK: vgl run / vgl in general
+
+3D filter		CHECK: what does it do (pvserver ?!)
+
+JUPE			CHECK: automates operations on the supercomputer
+
+Emacs			CHECK: functionality => good what for ?!
+
+

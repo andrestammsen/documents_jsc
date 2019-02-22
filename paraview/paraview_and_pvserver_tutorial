@@ -1,0 +1,29 @@
+
+TODO:			CHECK EVERYTHING AND DO IT AGAIN
+
+			how to connect paraview to multliple servers and test load-balancing
+
+open paraview		with the script stammsen_run_paraview_and_pvserver.job
+start servers		in the same script :)
+connect to servers	server symbol green
+	first time	add the connection (first one is 11111), name it ...
+	after that	choose the installed configuration from the list:
+				- the main server is addressed
+				- that server communicates to the others
+				- the server script sets up a configuration !! which is saved
+				- different server configuration => add new server :)
+create data		wavelet source
+properties		"Whole Extent" to 100 or 1000
+memory usage		check Memory Inspector (client and servers/processes are shown)
+contour filter		creates full inner structure for the wavelet
+ProcessIdScalars	shows which process clculates which part of the pipeline
+			alternative: vtkProcessId
+			automatic polling makes it look like 100% ?!?!
+			pipeline automatically distributed between the nodes?/processes?/servers?
+
+
+CHECK			EGL => no window is opened
+CHECK			OS => offscreen rendering
+
+
+

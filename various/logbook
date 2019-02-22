@@ -1,0 +1,113 @@
+
+LOG	stammsie's daily notes
+
+181206	try to release a simple script on a login node with the new usage model
+	try to use the automatized scripts to execute the complete task
+	DONE: found old account in new usage model
+
+181107	the basic idea for today is to take the next steps in handling the pvserver via
+	remote vncserver and paraview GUI; therefore I repeat all succesful steps done so far
+	and try to execute them on jureca as well
+
+
+	- plan 1: start pvserver and run script from inside paraview GUI using vncserver
+	  plan 2: start pvserver and run script without paraview GUI using vncserver
+	  do this tomorrow after repeating all known steps today
+
+
+	- use remote VNC
+
+		log in to account on jureca
+		start remote VNC server
+		tunnel VNC traffic to local workstation
+		start local VNC viewer (Turbo) and connect to the remote server
+		open paraview via this connection on the remote server
+
+
+	- execute script locally with pvpython
+
+	  	script		parasphere.py (minimal script from the paraview-tutorial)
+		location	local paraview's "bin"-folder
+		command		./pvpthon parasphere.py
+		parallel	no
+		result		SUCCESSFUL
+				the image appears swiftly, and a .png-file is created
+
+		other script	manyspheres.py (test script from github benchmark folder)
+		location	local paraview's "bin"-folder
+		command		./pvpython manyspheres.py
+		parallel	no?!
+		result		SUCCESSFUL
+				the animation is displayed and all the log-files are created
+
+
+	- execute script locally with pvbatch
+
+	  	script		parasphere.py
+	  	location	local paraview's "bin"-folder
+		command		./mpiexec -np 4 ./pvbatch parasphere.py
+		parallel	yes
+		result		SUCCESSFUL
+				the image does not appear but is saved as a file (batch mode)
+				the amount of nodes used is shown by the coloring of the sphere				
+		script		manyspheres.py
+		location	local paraview's "bin"-folder
+		command		./mpiexec -np 4 ./pvbatch parasphere.py
+		parallel	yes
+		result		SUCCESSFUL
+				it can be executed with and without mpiexec (just a normal batch job)
+				I have varied the amount -np between 1, 2 and 4
+				I am not sure how to interprete the results
+	
+
+	- execute script locally from within local paraview GUI
+
+		script		parasphere.py
+		location	local paraview's "bin"-folder
+		command		run script (Python shell window in paraview)
+		parallel	no
+		result		SUCCESSFUL
+
+		script		manyspheres.py
+		loc!ation	local paraview's "bin"-folder
+		command		run script (Python shell window in paraview)
+		parallel	???
+		result		NOT SUCCESSFUL
+				nothing is shown inside paraview's rendering window
+				appearently, the script is not executed at all
+				no files are produced in the corresponding folder
+
+
+	- execute script locally from within local paraview using a manually pre-activated pvserver
+
+		script		parasphere.py
+		location	local paraview's "bin"-folder
+		command		run script (Python shell window in paraview)
+		parallel	yes
+		result		SUCCESFUL
+				(not actually parallel because of the workstation)
+				(the amount of "simulated" nodes is shown as differen colors)
+
+
+		script		manyspheres.py
+		location	local paraview's "bin"-folder
+		command		run script (Python shell window in paraview)
+		parallel	???
+		result		NOT SUCCESSFUL
+				same problem like above with executing this script from inside paraview
+				=> the answer is probably obvious
+
+
+181108		
+
+	- copy scripts to jureca account using SSH command scp <client> <server>
+		1) sphere.py
+		2) parasphere.py
+		3) manyspheres.py
+
+	- execute simple scripts from inside the ParaView GUI
+		- open Python shell (tools)
+		- "Run Script"
+		- SUCCESSFUL: the results are being displayed in ParaView as usually
+
+

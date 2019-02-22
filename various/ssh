@@ -1,0 +1,23 @@
+
+TODO:			CHECK EVERYTHING AGAIN AND MAYBE MAKE ADJUSTMENTS
+
+SSH			stammsie's tutorial for the use of ssh stuff
+
+login basic		ssh stammsen2@jurecavis.fz-juelich.de
+			( specifies the visualization nodes						)
+			( the ".fz-juelich.de" can be omitted since I am already in the fzj-environment	)
+
+full example		ssh -N -4 -L 5901:jurecavis01:5901 stammsen2@jurecavis01.fz-juelich.de
+			( 5901 specifies the first display (out of 16?)						)
+			( jurecavis01 specifies the node (out of 24?						)
+			( -4 to indicate the strict use of the Ipv4 protocol!!!					)
+			( otherwise the address can not be resolved						)
+			( the ".fz-juelich.de" can be omitted since i am already  in the fzj-environment	)
+file transfer		scp <local/file-path> <remote-machine:file/path>
+			examples:
+				copy to remote system
+				scp -r ./bench_scripts/. stammsen2@jureca.fz-juelich.de:~/../../../../project/cjsc/stammsen/bench_scripts
+				copy from remote system
+				scp stammsen2@jureca.fz-juelich.de:~/../../../../project/cjsc/stammsen/simple_jobs/wavelet_contour.png  ~/image
+
+

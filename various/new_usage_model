@@ -1,0 +1,21 @@
+new usage model		
+
+one account per person	stammsen2
+			user is uniquely assigned to one account	
+			primary group id : jusers
+			secondary groups manage CPU quota
+			HOME-directory: /home/jusers/stammsen2/jureca
+				=> new home structure includes the system the user is currently working at
+				=> different config files for different systems possible
+			SHARED-directory: /home/jusers/stammsen2/shared for common data
+			e.g.	primary general group	stammsen2
+				secondary group		cjsc for access to the project
+
+project space separated	$HOME can be considered as private to the user
+from user space			=> should only be used for ssh-keys, config files etc
+			$PROJECT for every project for data, executables, libraries ...
+				=> all data formerly stored in $HOME should no be stored here
+				=> during transition there is automatic transfer for the user
+					=> <oldaccount> data goes to $PROJECT/<oldaccount>
+				=> all users have a common view on the project space
+			$SCRATCH temporary data, formerly $WORK, in every project as well

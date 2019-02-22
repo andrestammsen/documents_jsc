@@ -1,0 +1,30 @@
+
+				paraview tutorial; stammie's list of commands and routines for pvpython
+
+buttons				mouse-click might reveal the attached pvpython code
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+SHORTCUTS
+search command/source ...	Ctrl + Space
+SHORTCUTS
+search command/source ...	Ctrl + Space
+
+
+
+
+COMMANDS			list of pvpython commands
+
+box = Box()			creates a box for objects to be shown and makes the box object visible in the pipeline
+boxDisplay = Show()		VS rendering!!! always store the returned handle to the object in a proxy variable
+
+c = GetActiveCamera()		get a representation of the current image from the camera and
+c.Asimuth(22.5)			rotate it around the vertical and horizontal axis to its desired starting point
+c.Elevation(22.5)	
+
+pidScaleDisplay.Opacity = 0.5	set the amount of opacity/transparency
+
+Render()			this command actually creates a visual representation on the screen
+
+

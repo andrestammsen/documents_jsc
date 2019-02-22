@@ -1,0 +1,40 @@
+
+JUM		JURECA;	Stammsie's little summary of the
+			User's Manual for the Batch System - Slurm
+			[Slurm integrated with Parastation]
+
+
+1) Cluster Information
+
+	1.1) Introduction
+
+		- JURECA: Juelich Research on Exascale Cluster Architectures
+		- 1.8 PFLOPS peak performance (petaflop: 10E15 floating point operations per second)
+		  1884 compute nodes
+		  Intel CPUs with 12 cores
+		  V-class server architecture
+		  nodes	- dual-socket system => 24 cores per node
+			- 128 GiB memory per node (or more for special needs)
+			- accelerated nodes with NVIDIA GPUs
+			- login nodes for login process
+			- visualization nodes with large main memory
+			- all types:	Thin Compute
+					Fat type-1
+					Fat type-2
+					GPUs
+					Visualization type-1 (jrc[1385-1392])
+					Visualization type-2 (jrc[1392-1394])
+					
+		- WORK and HOME filesystems mounted from JUST storage cluster
+		- CentOS 7 Linux enterprise distribution
+		- Parastation MPI implementation
+		- hierarchical module environment for software offerings
+		- batch system:
+			Slurm open-source workload manager and
+			Parastation resource management
+
+	1.2) Cluster Nodes
+
+		
+		
+CHECK		module spider xxxxx

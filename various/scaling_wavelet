@@ -1,0 +1,24 @@
+
+TODO:	PUT THIS INFORMATION IN THE SCRIPT
+
+this file tackles the problem of how to set the view in terms of scaling as to display the entire wavelet in the image
+
+
+wavelet with edge size 10 (respectively 20):
+
+renderView1.CameraPosition = [-0.44920715948365064, 0.6174346406371669, 66.9169482005498]
+renderView1.CameraViewUp = [6.19337465741843e-05, 0.9999574369798779, -0.009226071365679621]
+renderView1.CameraParallelScale = 17.320508075688775
+
+
+wavelet with edge size 100 (respectively 200):
+
+renderView1.CameraPosition = [-4.492071594836506, 6.174346406371669, 669.1694820054979]
+renderView1.CameraViewUp = [6.19337465741843e-05, 0.9999574369798779, -0.009226071365679621]
+renderView1.CameraParallelScale = 173.20508075688772
+
+
+conclusion: the following attributes need to be changed:	CameraPosition
+								CameraParallelScale
+
+

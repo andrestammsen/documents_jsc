@@ -1,0 +1,31 @@
+
+FZJ			Forschungszentrum Juelich; stammsie's accounts and clues to the passwords
+
+telephone number	02461-61-1792
+room number		1307
+building number		16.4
+employee portal		stammsen
+			complete (mitarbeiterportal)
+email/outlook web app	a.stammsen@fz-juelich.de
+	      	  	complete (outlook)
+printer			zam 19
+account			../home0/stammsen
+			short(X3-X2-X1)...n (complete but short) (workstation)
+jureca			stammsen
+			complete (SSH)
+trac			a.stammsen
+			jscvis2018
+BSCW shared workspace	stammsen
+			complete (BSCW)
+vnc			short(X3-X2-X1)...n (complete but short) (workstation)
+
+GitLab			stammsen1
+				pw as usual for GitLab
+			stammsen2
+				pw as usual for GitLab
+			ssh key: id_rsa_gitlab(.pub)
+				pw as usual for GitLab
+
+JuDoor			stammsen1
+			stammsen2
+				pw like GitLab

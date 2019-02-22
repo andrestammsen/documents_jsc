@@ -1,0 +1,104 @@
+
+SLM			SLURM; stammsie's guide to batch usage in JSC
+			summary of the slides: "Batch Usage in JSC - Introduction to Slurm"
+
+cluster			set of tightly connected 'identical" nodes connected through
+			high speed local network with access to shared resources
+
+batch processing	execution of jobs without user intervention
+
+job			user-defined work-flow executed by the batch system
+
+resource manager	software that manages tasks, nodes, CPUs, memory, network etc
+
+scheduler		also workload-manager, handles job submissions and puts jobs into queues
+			controls the resource manager
+
+batch system		combination of scheduler and resource manager (e.g. slurm)
+
+JSC batch model		priority scheduling, backfilling (freeing resources for the next higher jobs),
+			no node-sharing, CPU-quota (number of nodes x walltime), contingent priorities
+
+slurm			batch system for JURECA, developed by SchedMD, configuration as stated above,
+			groups partitions (allowed users and groups, max nodes and walltime per job,
+			max jobs per user), architecture in detail in the slides
+
+system usage		the following heads contains the usage instructions
+
+modules			hierarchy of modules organizes the installed software on the cluster
+			loading a module adapts the environment variables
+			to give access to specific sets of software and its dependencies
+			
+			preparing a module environment consists of two steps:
+			  a) loading one of the available tool-chains:
+			     1) Compilers
+			     2) Compilers+MPI
+			     3) FullToolChains
+			  b) laod other application modules which were built with the currently loaded tool-chain
+
+			useful commands:
+
+			display help for modules	module
+			list available toolchains	module avail
+			load a toolchain		module load intel-para/2018a
+ 			list all loaded modules		module list
+			list available modules		module avail
+			look for modules with keywords	module keyword Boost
+			check a package			module spider Boost/1.66.0-Python-3.6.5
+			load a module			module load Boost/1.66.0-Python-3.6.5
+			unload a module			module unload Boost/1.66.0-Python-3.6.5
+			unload all loaded modules	module purge
+
+compilation		mpicc, mpicxx, mpif77, mpif90 as wrappers for parallel jobs using MPI
+			  -g 	debugging enabled
+			  -openmp	OpenMP enabled
+			  -L	path for linker to search libraries
+			example: mpicc --openmp --o mpi_prog program.c
+
+user commands		- salloc	request interactive jobs / allocations
+			- sattach	attach standard input, outpu and error to a running job
+			- sbtach	submit a batch script (bash, Perl, Python)
+			- scancel	cancel a pending / running job
+			- sbcast	transfer a file to all nodes of a job
+			- sgather	transfer file from all allocated nodes to the active job inside a job script
+			- scontrol	manage jobs or query information about the system
+			- sinfo		retrieve info about partitions, reservations, node states
+			- smap		gracphic display of partitions / nodes
+			- llview	alternative
+			- sprio		query job priorities
+			- squeue	query list of pending / running jobs
+			- srun		initiate job-steps
+			- sshare	retrieve fair-share info for each user
+			- sstat		query status info about running job
+			- sview		graphical user interface for info on jobs / partitions / nodes
+			- ssact		retrieve accounting info about jobs in Slurm's database
+			- sacctmgr	same stuff for users
+
+job submission		- sbatch	batch jobs
+			    format:	sbatch [options] jobscript [args ...]
+			(- salloc	interactive jobs)
+			(    format:	salloc [options] [<command> [commands args]])
+
+			list of the most important submission / allocations options:
+
+			-c	--cpus-per-task	number of logical CPUs per task (hardware threads)
+			-e	--error		path to standard error
+			-i	--input		connect the jobscript's standard input directly to a file
+			-J	--job-name	set name
+			-N	--nodes		number of compute nodes
+			-n	--ntasks	number of tasks (MPI processes)
+			-o	--output	path to standard output
+			-p	--partition	partition to be used
+			-t	--time		maximum wall-clock time
+
+spawming command	srun [options] executable [args...]
+			any kind of application / process / task can be spawned inside a job allocation:
+			  - inside a job script => starts a job-step
+			( - after calling salloc)
+			options are possible (check slides)
+			note: always use srun, not mpiexec to spawn MPI applications
+
+job script examples	check slides
+
+
+
