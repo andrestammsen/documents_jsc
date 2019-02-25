@@ -1,76 +1,37 @@
-IPLAN_190218 
-:
-- Programm endet auf 0 und 1 :) -> alles gut oder nicht aus der Visualisierung
 
-- Unterscheidung zwischen Funktionalitaet und Performance
+BRAINSTORM JHG 190218 --------------------------------------------------------------------------------------------------
 
-- ob etwas funktioniert: f?r Visualisierung erstmal nur Paraview testen 
-  -> erstmal nur mit GPU und dann GPU mit Mesa und dann mit Parastation_MPI und Intel und GCC, OpenGL
-  -> muss ich eventuell hierfuer noch etwas kompileren?
+Testprogramm		aus Kommandozeile endet auf 0 oder 1 -> alles gut oder nicht aus Visualisierung
+			-> GitLab-Ordner mit readme schoen erklaert
 
-- wie stellt man fest ob die Visualisierung korrekt ist -> Bildvergleich muss gemacht werden
-  -> geht nicht per Pixel, sondern muss einen gewissen Fehler beinhalten
+Ziel			Workflow steht bis Ende Maerz
 
-- bitweise bzw. per RGB per Pixel kann man nicht erwarten, dass die Uebereinstimmung gross genug ist
+Unterscheidung		zwischen Funktionalitaet und Performance
 
-- Programm raussuchen, dass zwischen 0 und 1 sozusagen auswertet und entscheidet, z.B. threshold 0.7
-  -> sollte Kommandozeilenprogramm sein, dass das macht
+Funktionstest		fuer Visualisierung erst nur Paraview (evtl. Kompilate noetig)
+			erst nur GPU, dann mit Mesa, mit Parastation_MPI und Intel und GCC, OpenGL ...
 
-- WELCHES PROGRAMM KANN ICH DAFUER NEHMEN?
+Korrektheitstest	Korrektheit der Visualisierung ueber Bildvergleich testen
+			-> nicht per Pixel, bitweise, RGB o.ae.; muss gewissen Fehler beinhalten; Kanten, Farben ...
+			-> evtl. Mittelwert eines Blocks, z.B. 16x16, mit Abweichungstoleranz
+			-> z.B. leichter Grauwert aus Schattierung egal, komplett andere Farbe nicht
+			-> lieber zu streng (false positive oder so)
 
-. evtl Mittelwert eines Blocks nehmen, z.B. 16 x 16 Pixel, und darin eine gewisse Abweichung zugestehen
-  -> darf dann z.B. vorher nicht ganz schwarz gewesen sein und jetzt auf einmal ganz rot
+Hilfsprogramm		ImageMagick zur Auswertung der Unterschiede; damit Diskussion ueber Programm dafuer beendet
 
-- Idee: krasse Unterschiede sollten entdeckt werden, also schwarz und weiss,
-  -> aber z.B. leichte Abweichungen im Grauwert der Schattierung waere unprblematisch
+Paraview Versionen	muessen im setup beruecksichtigt werden, jedes halbe Jahr neue Version
+			-> spaeter durchwuehlen um zu sehen, was es alles so gibt
 
-- Idee: in GitLab so drin stehen haben, dass sozusagen ein komplett Au?enstehender es mit readme bedienen kann
-  -> z.B. ein Ordner pro Test, Referenzbilder, readme, Beispiele, Statistiken ...
+Setups			erst haendisch settings erstellen -> spaeter Sprung zu Jupe, wenn alles funktioniert
+			-> erst komplettes setting suchen fuer Testen des Bildvergleichs
 
-- bedenke, dass ParaView jedes Jahr neue Versionen rausbringt
-  -> das Setup muss die updates ber?cksichtigen
+Git			Ordner hat hohe Bedeutung; gesamte Integration sollte dort stattfinden
+			Unterteilung des repos in Referenzbilder, readme, Beispiele, Statistiken, Tests ...
 
-- nicht so krass wie KI oder neuronale Netze, also Gesichts- uder Inhaltserkennung
-  -> nur Kanten und Fraben vergleich usw.
-  -> dabei: lieber positive falses als false positives,
-  -> also lieber zu oft schlechte Ergebnisse obwohl es stimmt als gute liefern die nicht stimmen
+Continuous Integration	vielleicht in meinem Fall nicht wertvoll, da nur Tests ueber Skripte ineinander gesteckt werden
+			-> Idee: Test zu verschiedenen Themen des Programms
+				 Master gepflegt: Tests laufen auf allen Systemen, kompiliert, funktionell, Doku ....
+			-> yvml: wichtigste Datei zum Ansteuern der Skripte mit GitLab -> gitlab runner -> Docker-Ordner
+			-> Wiki dazu von JHG checken (minimaler CI-Test, nur ein MPI-Befehl fuer Ablauf)
+			-> mit CMake gebaut, nicht direkt auf mich uebertragbar
 
--konkret: Bildvergleich-Programm !!!! -> keine Wissenschaft draus machen, sondern etwas nehmen was gut laeuft
-  -> schon irgendwie Intel-basiert, im besten Fall keine Abhhaengigkeiten, also z.B. reines C-Programm usw.
-  -> Python ginge auch, dann kann man einfach Pip-Install nutzen, um es auf das System zu packen
-  -> sollte m?glichst robust zhu benutzen sein, also einfach die Bidler angeben und fertig
-  -> also z.B. kein Gimp oder sowas installieren m?ssen
-  -> Ziel: einfach eine Zahl am Ende, die relativ aussagekr?ftig ist
-
-- Frage fuer verschiedene Setups: erstmal haendisch Settigns erstellen
-  -> wenn diese einzeln funktionieren, dann kann man den Sprung zu JUPE machen
-
-- erstmal ein komplettes Setting suchen fuer das Testen des Bildvergleichs
-
-- spaeter urch die Paraview-Installationen durchwuehlen, damit man sieht, was es so alles gibt
-
-- Git-Ordner hat hohe Bedeutung heirbei
-  -> einzelne Schritte sind keine Zauberei, aber das komplette Ganze sollte funktionieren
-
-- Continuous Integration k?nnte man mal checken, obwohl es vielleicht in meinem Fall nicht so direkt
-  wertvoll aussieht, da ich hier nur Tests ueber skripte ineinander stecke
-
-- check Unterschied GitLab und GitHub :)
-
-- Continuous Integration: allerlei Tests zu verschiedenen Themen des Programms
-  -> Master wird gepflegt: Tests laufen auf allen Systemen durch, koompiliert, immer funktionell, Doku komplett ...
-
-- yvml wichtigste Datei zum Ansteuern der Skripte mit GitLab
-
-- es wird sich mit dem gitlab runner  -> der startet den Docker-Ordner ...
-
-- CHECK: Wiki fon JHGs GitLink
-
-- Continuous Integraion wird in diesem Projekt getestet, Inhalt nur sehr minimal, nur ein MPI-Befehl wird ausgef?hrt
-  -> bauen muss mit CMake gemacht werden, hier deswegen leider nicht direkt ?bertragbar auf meine Situation
-
-- zeitliche Einteilung ueberlegen
-
-- ZIEL: bis Ende Maerz einmal den Workflow ganz durch am laufen haben, lieber noch nicht perfekt, aber dafuer komplett
-
-- 

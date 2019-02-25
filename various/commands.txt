@@ -1,54 +1,23 @@
 
-TODO: TRY ALL OF THEM AGAIN AND PUT THEM IN A FILE THAT BELONGS TO THE TOPIC
+README		collection of commands that were successfully used as a reminder of possibilities and options
 
-loose collection of commands that were successfully used
+sacct		account information
 
-sbatch --start-xserver vncviewer_two_hours.job
+display 	starts ImageMagick to display pictures
 
-mark text => middle click on mouse
+vncpasswd	set password for vncviewer
 
-cp authorized_keys known_hosts ~/.ssh
+jutil 		user projects -o columns
 
-sacct
+srun 		./parallel_wavelet.job
 
-sbatch parallel_wavelet.job
+sbatch		parallel_wavelet.job
 
-ssh -N -4 -L 5902:jurecavis02:5902 stammsen2@jurecavis02.fz-juelich.de
+tail		-f stammsen_parallel_wavelet-6625834.err
 
-ssh -N -4 -L 5902:jrc1386:5902 stammsen2@jureca.fz-juelich.de
+srun --help | 	grep "x", grep "-x", grep variable, grep mpi
 
-sbatch --start-xserver vncviewer_two_hours.job
+cat		 /var/spool/parastation/jobs/6625709
 
-rm authorized_keys known_hosts
-
-display wavelet_contour_100.png
-
-vncpasswd
-
-cd jusers
-
-scp stammsen2@jureca.fz-juelich.de:~/../../../../project/cjsc/stammsen/simple_jobs/wavelet_contour.png  ~/wavelet_contour.png
-
-ssh stammsen2@jureca.fz-juelich.de
-
-ssh stammsen2@jurecavis.fz-juelich.de
-
-jutil user projects -o columns
-
-jutil stammsen projects -o column
-
-srun ./parallel_wavelet.job
-sbatch parallel_wavelet.job
-
-tail -f stammsen_parallel_wavelet-6625834.err
-
-srun --help | grep "x"
-srun --help | grep "-x"
-srun --help | grep variable
-srun --help | grep mpi
-
-cat /var/spool/parastation/jobs/6625709
-
-pvpython --help
-
+pvpython	--help
 

@@ -1,6 +1,5 @@
 
-TODO:		TRY THE STUFF AGAIN AND PUT IT IN FILES WHERE IT BELONGS BETTER TO THE TOPIC
-		general; stammsie's lsit of instructions and tips
+README		list of instructions and tips
 
 main issues	1) job script runs with pvserver serial and parallel on jureca
 		2) JUPE to automate operations on the supercomputer

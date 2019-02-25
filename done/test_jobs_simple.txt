@@ -1,0 +1,31 @@
+
+TODO			MAYBE MERGE THE FILE WITH ANOTHER ONE
+
+README			EXECUTE SOME SCRIPTS ON JURECA TO TEST BASIC FUNCTIONALITY
+
+test jobs		file		serial_simple.job
+			folder		stammsen/simple_jobs/various (on jureca account)
+			command		sbatch serial_simple.job
+			content		prints the hostname to the .out-file of the process as a serial job
+			source		basic info taken from "Batch Usage on JSC - Introduction to Slurm"
+			execution	190225 - successful
+
+			file		parallel_simple.job
+			folder		same
+			command		sbatch parallel_simple.job
+			content		prints the hostname as well like above and a start and end message
+			source		same
+			execution	190225 - successful
+
+			file		parallel_wavelet_complete.job
+			folder		same
+			command		sbatch parallel_wavelet_complete.job
+			content		load modules, execute srun on wavelet_contour.py (same folder)
+			source		JHG script that was modified
+			execution	190225 - not successful !!!!!
+
+					srun: Job step aborted: Waiting up to 6 seconds for job step to finish.
+					error: *** step 6803728:0 CANCELLED DUE TO TIME LIMIT ***
+					srun: error: jrc1386: tasks 0-11: Terminated
+					/var/spool/parastation/jobs/6803728: line 64: error_exit: command not found
+

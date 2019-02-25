@@ -98,9 +98,7 @@ LOG	stammsie's daily notes
 				=> the answer is probably obvious
 
 
-181108		
-
-	- copy scripts to jureca account using SSH command scp <client> <server>
+181108	- copy scripts to jureca account using SSH command scp <client> <server>
 		1) sphere.py
 		2) parasphere.py
 		3) manyspheres.py
@@ -109,5 +107,7 @@ LOG	stammsie's daily notes
 		- open Python shell (tools)
 		- "Run Script"
 		- SUCCESSFUL: the results are being displayed in ParaView as usually
+
+190225	finish cleaning up bookmarks, documents, files ...
 
 

@@ -1,6 +1,0 @@
-
-MPI				stammsie's tips for using mpi
-
-slurm				wrapper for mpi_exec
-srun --n tasks-per-node		several nodes
-
