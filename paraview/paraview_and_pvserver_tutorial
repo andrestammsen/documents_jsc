@@ -1,7 +1,8 @@
 
-TODO:			CHECK EVERYTHING AND DO IT AGAIN
+TODO			CHECK EVERYTHING AND DO IT AGAIN
 
-			how to connect paraview to multliple servers and test load-balancing
+README			how to connect paraview to multliple servers and test load-balancing
+			this file is the explanatory/tutorial file for the paraview_and_pvserver_jureca.sh
 
 open paraview		with the script stammsen_run_paraview_and_pvserver.job
 start servers		in the same script :)

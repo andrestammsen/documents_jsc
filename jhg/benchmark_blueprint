@@ -1,5 +1,5 @@
 
-BENCH_SCRIPTS_JHG	SUMMARY OF THE GitLab REPOSITORY TO PRODIVE AN EXAMPLE OF A BENCHMARKING PROCEDURE
+BENCHMARK_BLUEPRINT	SUMMARY OF THE GitLab REPOSITORY TO PROVIDE AN EXAMPLE OF A BENCHMARKING PROCEDURE
 
 1) create new template	general copy for completely new entire benchmark run
 				a) copy example directory template.lsf
@@ -9,7 +9,7 @@ BENCH_SCRIPTS_JHG	SUMMARY OF THE GitLab REPOSITORY TO PRODIVE AN EXAMPLE OF A BE
 
 2) modify/run		modify basic script and create all necessary job scripts
 				a) adjust runtine, memory... in create_bench
-create bench			b) run create_bench
+				b) run create_bench
 
 3) run benchmarks	run tests
 				a) run_bench
@@ -17,7 +17,6 @@ create bench			b) run create_bench
 4) plot results		plot tests
 				a) run plot_bench
 				b) dump as text file and image file
-
 
 
 create bench		general directory

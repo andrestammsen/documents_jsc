@@ -1,4 +1,9 @@
 
+TODO		I STARTED THIS SUMMARY; MAYBE I SHOULD TRY TO CREATE A VERY ROUGH OVERVIEW AND SOME DETAILS WHICH I HAVE
+		HAVE PREVIOUSLY USED OR COME ACROSS
+
+README		summary including overview and later on commands as well, but so far not yet
+
 JUM		JURECA;	Stammsie's little summary of the
 			User's Manual for the Batch System - Slurm
 			[Slurm integrated with Parastation]
@@ -34,7 +39,6 @@ JUM		JURECA;	Stammsie's little summary of the
 			Parastation resource management
 
 	1.2) Cluster Nodes
-
 		
 		
 CHECK		module spider xxxxx

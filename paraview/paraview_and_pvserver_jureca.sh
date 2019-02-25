@@ -1,3 +1,8 @@
+
+#TODO		TRY IT AGAIN :):)
+
+# README:	script to start paraview and pvserver on jureca
+
 #!/bin/sh
 
 # unload all modules / clean environment

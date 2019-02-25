@@ -1,5 +1,8 @@
 
-SLM			SLURM; stammsie's guide to batch usage in JSC
+TODO			READ IT QUICKLY TO CHECK FOR ABUNDANT/MISSING STUFF AND TRY THE COMMANDS AGAIN
+			MAYBE ADD MORE STUFF OVER TIME OR DIVIDE IMPORTANT FROM LESS IMPORTANT PARTS
+
+README			SLURM; stammsie's guide to batch usage in JSC
 			summary of the slides: "Batch Usage in JSC - Introduction to Slurm"
 
 cluster			set of tightly connected 'identical" nodes connected through

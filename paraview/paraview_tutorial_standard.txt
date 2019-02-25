@@ -1,5 +1,7 @@
 
-				paraview tutorial; stammie's list of commands and routines for pvpython
+TODO				IS THIS THE MAIN FILE? SHOULD THERE NOT BE MORE?
+
+README				paraview tutorial; stammie's list of commands and routines for pvpython
 
 buttons				mouse-click might reveal the attached pvpython code
 
