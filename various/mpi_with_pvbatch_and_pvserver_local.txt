@@ -1,0 +1,41 @@
+
+README			LOCAL EXECUTION OF MPI WITH PVBATCH AND PVSERVER USING EXAMPLE FILE PARASPHERE.PY
+
+mpi and pv batch	./mpiexec -np 24 ./pvbatch parasphere.py
+                                => WORKS !!!!!
+                                => local execution
+                                => executes script as batch job 
+                                => nothing is displayed, but the file "parasphere.png" is created
+                                => four processes are used (according to the vtkProcessID coloring)
+                                => parallelization is done automatically at the start of the pipeline by pvbatch
+                                        => less work since the distribution of the processes requires
+                                           no manual actio at the start of the pipeline
+                                        => less work since the distribution of the processes requires no manual action
+                                        => pvbatch without mpi is the same as pvpython :):)
+                                        => pvbatch can only be compiled with MPI, but can be executed without
+                                        => dynamic linker will search for libraries to resolve the functions for mpi,
+                                           that means that the environment is required
+                                               
+
+pvserver with mpi	./mpiexec -np 24 ./pvserver --server-port="11112" (--hostname="localhost" not necessary!!!)
+                                => WORKS !!!!! 
+
+                                a) connecting to the server with the GUI 
+                                        => WORKS !!!!!
+                                        => local execution
+                                        => according to the vtkProcessID coloring in parallel
+                                        => open GUI, choose server, execute script
+                                            
+                                b) file as argument to pvpython and pvserver
+                                        => WORKS !!!!! (basically, but segmentation fault :( )
+                                        => ./pvpython --server-url="cs://localhost:11112" test_server.py
+                                        => pass server-url as String to pvpython and pass file as argument
+                                        => local execution
+                                        => pvpython starts a server, connects to it and executes the script
+                                        => TODO: try the same with the sphere to check the parallelism
+
+conn pv GUI to server   ./paraview --server-url="localhost"
+at startup                      => DOES NOT WORK !!!!!
+                                => local execution
+                                => only one vktProcessId is shown as color
+

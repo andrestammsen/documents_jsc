@@ -1,0 +1,14 @@
+
+README			TRY TO START PVSERVERS IN PARALLEL AND EXECUTE PARAVIEW CONNECTED TO THEM
+
+paraview and servers    use a script to start paraview (load modules ...) and a script that start 12 servers (JHG)
+                                => WORKS !!!!!
+                                => the server script was taken from JHG and starts 12 servers
+                                => the communication takes place only between the GUI and the "leading" server
+
+execute python file     ....
+as batch job                
+
+
+
+

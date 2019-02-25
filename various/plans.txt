@@ -1,73 +1,8 @@
 
-TODO		READ IT AGAIN QUICKLY AND EXECUTE THE STEPS ONCE MORE FOR PRACTISE
-		MERGE THIS FILE IN PART WITH OTHERS WHERE THE INFO FITS BETTER AND MAYBE MAKE A SUMMARY AND BACKup
-		MAYBE DIVIDE IT INTO BRAINSTORM WITH JHG STUFF AND THE EXECUTION STUFF
-		-> THE BRAINSTORM COULD BE MERGED INTO A ROADMAP FILE WITH THE OTHER PLANS FROM THE FOLDER PLANS
-
-README		PROCESSES/STEPS/ACTIONS THAT HAVE OR HAVE NOT WORKED BUT ARE MORE OR LESS CHECKED OUT
+README			BRAINSTORMS AND PLANS WITH JHG
 
 
-local execution --------------------------------------------------------------------------------------------------------
-
-
-mpi and batch		./mpiexec -np 24 ./pvbatch parasphere.py
-				=> WORKS !!!!!
-				=> local execution
-				=> executes script as batch job
-				=> nothing is displayed, but the file "parasphere.png" is created
-				=> four processes are used (according to the vtkProcessID coloring)
-				=> parallelization is done automatically at the start of the pipeline by pvbatch
-					=> less work since the distribution of the processes requires
-					   no manual actio at the start of the pipeline
-					=> less work since the distribution of the processes requires no manual action
-					=> pvbatch without mpi is the same as pvpython :):)
-					=> pvbatch can only be compiled with MPI, but can be executed without
-					=> dynamic linker will search for libraries to resolve the functions for mpi,
-					   that means that the environment is required
-			
-
-pvserver with mpi	./mpiexec -np 24 ./pvserver --server-port="11112" (--hostname="localhost" not necessary!!!)
-				=> WORKS !!!!! 
-
-				a) connecting to the server with the GUI
-					=> WORKS !!!!!
-					=> local execution
-					=> according to the vtkProcessID coloring in parallel
-					=> open GUI, choose server, execute script
-				
-				b) file as argument to pvpython and pvserver
-					=> WORKS !!!!! (basically, but segmentation fault :( )
-					=> ./pvpython --server-url="cs://localhost:11112" test_server.py
-					=> pass server-url as String to pvpython and pass file as argument
-					=> local execution
-					=> pvpython starts a server, connects to it and executes the script
-					=> TODO: try the same with the sphere to check the parallelism
-
-conn pv GUI to server	./paraview --server-url="localhost"
-at startup			=> DOES NOT WORK !!!!!
-				=> local execution
-				=> only one vktProcessId is shown as color
-
-
-end local execution ----------------------------------------------------------------------------------------------------
-
-
-remote execution -------------------------------------------------------------------------------------------------------
-
-paraview and servers	use a script to start paraview (load modules ...) and a script that start 12 servers (JHG)
-				=> WORKS !!!!!
-				=> the server script was taken from JHG and starts 12 servers
-				=> the communication takes place only between the GUI and the "leading" server
-
-execute python file	....
-as batch job		
-
-
-
-end remote execution ---------------------------------------------------------------------------------------------------
-
-
-BRAINSTORM WITH JHG - 181128 -------------------------------------------------------------------------------------------
+181128			------------------------------------------------------------------------------------------------
 
 
 tips:			use wavelets for all tests
@@ -86,7 +21,7 @@ tasks:			benchmarking:	- use pvbatch on jureca for wavelet script 1000 x 1000 x 
 					- problem should be big enough to have a good workload for many cores but also
 					  but small enough to be executed on one node
 					- speedup and efficiency
-					- scaling: how does the solution time vary with the number of processors
+			- scaling: how does the solution time vary with the number of processors
 						a) weak scaling		fixed problem size per processor
 						b) strong scaling	fixed total problem size
 					- double data/double nodes => communication overhead grows > how does it scale?
@@ -138,14 +73,14 @@ tasks:			benchmarking:	- use pvbatch on jureca for wavelet script 1000 x 1000 x 
 
 			JUPE is just an organization toll to keep the overview over all the data
 
-final goal:		vast results over the cluster by means of very large datasets of benchmark results
+final goal		vast results over the cluster by means of very large datasets of benchmark results
 			which can be the reference for discussion over hardware etc
 
 
-general:		never open any x-windows / never display any graphics in batch-mode
+general			never open any x-windows / never display any graphics in batch-mode
 			results must be reliable !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-job reporting:		CHECK !!!
+job reporting		CHECK !!!
 			jsc job reporting
 			look on website => check pdf for storage usage, CPUs usage ...
 			=> e.g. compare calculated storage use for a problem with the job report results
@@ -153,11 +88,8 @@ job reporting:		CHECK !!!
 			      for the right expectations
 
 
-END BRAINSTORM WITH JHG - 181128 ---------------------------------------------------------------------------------------
+181214			------------------------------------------------------------------------------------------------
 
-
-
-BRAINSTORM WITH JHG - 181214 -------------------------------------------------------------------------------------------
 
 overall lesson		no-mpi => pvpython will work after importing paraview => mpi-problem solved ?!
 
@@ -231,15 +163,7 @@ config file login	state name of the key etc. to do automatic login
 Strg + r		reverse command search
 
 
-END BRAINSTORM WITH JHG - 181214 ---------------------------------------------------------------------------------------
-
-
-submit simple job	=> complete cycle including loading modules etc ?
-			=> indicate desired node ?
-			( => on local machine, pvbatch does the job of distributing the tasks itself! )
-
-
-BRAINSTORM WITH JHG - 181220 -------------------------------------------------------------------------------------------
+181220			------------------------------------------------------------------------------------------------
 
 
 --force purge		less output in *.err-file, but should not be used because auxiliary programs are purged as well
@@ -309,4 +233,42 @@ time command		CHECK !!!!! how it is done on Jureca
 
 time per kernel		the time that the kernel spent on the process can include idle time
 			=> maybe calculate the amount of operations
+
+
+190218			------------------------------------------------------------------------------------------------
+
+
+Testprogramm            aus Kommandozeile endet auf 0 oder 1 -> alles gut oder nicht aus Visualisierung
+                        -> GitLab-Ordner mit readme schoen erklaert
+
+Ziel                    Workflow steht bis Ende Maerz
+
+Unterscheidung          zwischen Funktionalitaet und Performance
+
+Funktionstest           fuer Visualisierung erst nur Paraview (evtl. Kompilate noetig)
+                        erst nur GPU, dann mit Mesa, mit Parastation_MPI und Intel und GCC, OpenGL ...
+
+Korrektheitstest        Korrektheit der Visualisierung ueber Bildvergleich testen
+                        -> nicht per Pixel, bitweise, RGB o.ae.; muss gewissen Fehler beinhalten; Kanten, Farben ...
+                        -> evtl. Mittelwert eines Blocks, z.B. 16x16, mit Abweichungstoleranz
+                        -> z.B. leichter Grauwert aus Schattierung egal, komplett andere Farbe nicht
+                        -> lieber zu streng (false positive oder so)
+
+Hilfsprogramm           ImageMagick zur Auswertung der Unterschiede; damit Diskussion ueber Programm dafuer beendet
+
+Paraview Versionen      muessen im setup beruecksichtigt werden, jedes halbe Jahr neue Version
+                        -> spaeter durchwuehlen um zu sehen, was es alles so gibt
+
+Setups                  erst haendisch settings erstellen -> spaeter Sprung zu Jupe, wenn alles funktioniert
+                        -> erst komplettes setting suchen fuer Testen des Bildvergleichs
+
+Git                     Ordner hat hohe Bedeutung; gesamte Integration sollte dort stattfinden
+                        Unterteilung des repos in Referenzbilder, readme, Beispiele, Statistiken, Tests ...
+
+Continuous Integration  vielleicht in meinem Fall nicht wertvoll, da nur Tests ueber Skripte ineinander gesteckt werden
+                        -> Idee: Test zu verschiedenen Themen des Programms
+                                 Master gepflegt: Tests laufen auf allen Systemen, kompiliert, funktionell, Doku ....
+                        -> yvml: wichtigste Datei zum Ansteuern der Skripte mit GitLab -> gitlab runner -> Docker-Ordner
+                        -> Wiki dazu von JHG checken (minimaler CI-Test, nur ein MPI-Befehl fuer Ablauf)
+                        -> mit CMake gebaut, nicht direkt auf mich uebertragbar
 
