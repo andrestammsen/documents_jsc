@@ -32,7 +32,7 @@ git merge master	merge created branch with master (checkout to branch before!); 
 git reset HEAD~1	undo the most recent commit
     .gitignore		write file names into this file that should be excluded structurally from all git actions
 git push --set-upstream ssh://git@gitlab.version.fz-juelich.de:10022/stammsen2/<project_name>.git master (macro:) )
-
+git rm -r -f <filename>	removes folder recursively and forces all actions (-f); only possible if folder was staged
 ------------------------------------------------------------------------------------------------------------------------
 
 BASIC SETUP		only once !!! local initialization of git	after that, it can be changed if necessary
